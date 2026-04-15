@@ -13,15 +13,18 @@ app.use(cors());
 app.use(express.json());
 
 const dbUrl=process.env.ATLASDB_URL;
-mongoose.connect(dbUrl);
+mongoose.connect(dbUrl, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log("Connected to MongoDB"))
+.catch((error) => console.error("Error connecting to MongoDB:", error));
 
 app.get('/', (req, res) => {
   res.send('Server is running successfully 🚀');
 });
 
 app.use("/api/user", userRoutes);
-
-
 
 app.listen(5000, () => {
   console.log("server started on port 5000");
