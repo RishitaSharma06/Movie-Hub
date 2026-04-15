@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 const dbUrl=process.env.ATLASDB_URL;
-db.connect(dbUrl);
+mongoose.connect(dbUrl);
 
 app.get('/', (req, res) => {
   res.send('Server is running successfully 🚀');
